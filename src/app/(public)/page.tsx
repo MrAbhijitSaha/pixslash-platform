@@ -1,5 +1,5 @@
-import WallpaperPageContent from "@/components/Wallpaper/WallpaperPageContent";
-import prisma from "@/lib/database/dbClient";
+import MasonryWallpaperGrid from "@/components/Wallpaper/Grid/MaonaryWallpaperGrid";
+import getAllWallpaper from "@/server/wallpaper/getAllWallpaper";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -9,32 +9,15 @@ export const metadata: Metadata = {
 };
 
 const page = async () => {
-  const getImages = await prisma.wallpaper.findMany({
-    where: {
-      isPublic: true,
-    },
+  const getAllWallpapers = await getAllWallpaper();
 
-    include: {
-      user: {
-        select: {
-          id: true,
-          name: true,
-          image: true,
-        },
-      },
-      _count: {
-        select: {
-          likes: true,
-        },
-      },
-    },
-  });
-
-  if (getImages.length === 0) {
-    return <div>No wallpapers found</div>;
+  if (getAllWallpapers.length === 0) {
+    return (
+      <div className="grid h-dvh place-items-center">No wallpapers found</div>
+    );
   }
 
-  return <WallpaperPageContent info={getImages} />;
+  return <MasonryWallpaperGrid wallpapers={getAllWallpapers} />;
 };
 
 export default page;

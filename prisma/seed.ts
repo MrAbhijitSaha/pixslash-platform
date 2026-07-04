@@ -173,10 +173,10 @@ const main = async () => {
     );
 
     // create map
-    const categoryMap = Object.fromEntries(
-      createdCategories.map((c) => [c.slug, c.id]),
-    );
-    const tagMap = Object.fromEntries(createdTags.map((t) => [t.slug, t.id]));
+    // const categoryMap = Object.fromEntries(
+    //   createdCategories.map((c) => [c.slug, c.id]),
+    // );
+    // const tagMap = Object.fromEntries(createdTags.map((t) => [t.slug, t.id]));
 
     const users = [
       {
@@ -247,327 +247,327 @@ const main = async () => {
 
     // Create users map
 
-    const userMap = Object.fromEntries(seededUsers.map((s) => [s.email, s.id]));
+    // const userMap = Object.fromEntries(seededUsers.map((s) => [s.email, s.id]));
 
     // create sample wallpaper data
-    const demoWallpapers = [
-      {
-        title: "Desert Dunes",
-        slug: "desert-dunes",
-        category: "nature",
-        description: "Golden sand dunes under the afternoon sun",
-        imageUrl:
-          "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1920&h=1080&q=80",
-        width: 3840,
-        height: 2160,
-        format: "jpg",
-        owner: "messi@gmail.com",
-        tags: ["desert", "nature", "4k"],
-      },
-      {
-        title: "Cyberpunk Street",
-        slug: "cyberpunk-street",
-        category: "gaming",
-        description: "Neon-lit futuristic city street",
-        imageUrl:
-          "https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1920&h=1080&q=80",
-        width: 3840,
-        height: 2160,
-        format: "jpg",
-        owner: "ronaldo@gmail.com",
-        tags: ["cyberpunk", "gaming", "neon"],
-      },
-      {
-        title: "Galaxy Horizon",
-        slug: "galaxy-horizon",
-        category: "space",
-        description: "Milky Way stretching over the horizon",
-        imageUrl:
-          "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=1920&h=1080&q=80",
-        width: 3840,
-        height: 2160,
-        format: "jpg",
-        owner: "neymar@gmail.com",
-        tags: ["space", "galaxy", "4k"],
-      },
-      {
-        title: "Tokyo Rain",
-        slug: "tokyo-rain",
-        category: "anime",
-        description: "Rainy city street inspired by anime aesthetics",
-        imageUrl:
-          "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1920&h=1080&q=80",
-        width: 1920,
-        height: 1080,
-        format: "jpg",
-        owner: "mbappe@gmail.com",
-        tags: ["anime", "rain", "city"],
-      },
-      {
-        title: "Luxury Supercar",
-        slug: "luxury-supercar",
-        category: "cars",
-        description: "Exotic supercar parked near skyscrapers",
-        imageUrl:
-          "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1920&h=1080&q=80",
-        width: 3840,
-        height: 2160,
-        format: "jpg",
-        owner: "haaland@gmail.com",
-        tags: ["car", "sports", "4k"],
-      },
-      {
-        title: "Dark AMOLED Mountain",
-        slug: "dark-amoled-mountain",
-        category: "minimal",
-        description: "Minimal mountain silhouette on black background",
-        imageUrl:
-          "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1440&h=3200&q=80",
-        width: 1440,
-        height: 3200,
-        format: "jpg",
-        owner: "debruyne@gmail.com",
-        tags: ["amoled", "minimal", "dark"],
-      },
-      {
-        title: "Blue Abstract Flow",
-        slug: "blue-abstract-flow",
-        category: "abstract",
-        description: "Smooth blue flowing abstract shapes",
-        imageUrl:
-          "https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&w=1920&h=1080&q=80",
-        width: 2560,
-        height: 1440,
-        format: "jpg",
-        owner: "messi@gmail.com",
-        tags: ["abstract", "blue", "hd"],
-      },
-      {
-        title: "Snow Wolf",
-        slug: "snow-wolf",
-        category: "animals",
-        description: "White wolf standing in the snow",
-        imageUrl:
-          "https://images.unsplash.com/photo-1474511320723-9a56873867b5?auto=format&fit=crop&w=1920&h=1080&q=80",
-        width: 3840,
-        height: 2160,
-        format: "jpg",
-        owner: "ronaldo@gmail.com",
-        tags: ["wolf", "animal", "4k"],
-      },
-      {
-        title: "Green Matrix Code",
-        slug: "green-matrix-code",
-        category: "technology",
-        description: "Digital code streaming in green",
-        imageUrl:
-          "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1920&h=1080&q=80",
-        width: 3840,
-        height: 2160,
-        format: "jpg",
-        owner: "neymar@gmail.com",
-        tags: ["technology", "code", "dark"],
-      },
-      {
-        title: "Northern Lights",
-        slug: "northern-lights",
-        category: "nature",
-        description: "Aurora borealis over snowy landscape",
-        imageUrl:
-          "https://images.unsplash.com/photo-1483347756197-71ef80e95f73?auto=format&fit=crop&w=1920&h=1080&q=80",
-        width: 3840,
-        height: 2160,
-        format: "jpg",
-        owner: "mbappe@gmail.com",
-        tags: ["aurora", "nature", "4k"],
-      },
-      {
-        title: "Space Station View",
-        slug: "space-station-view",
-        category: "space",
-        description: "Earth viewed from a futuristic space station",
-        imageUrl:
-          "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1920&h=1080&q=80",
-        width: 3840,
-        height: 2160,
-        format: "jpg",
-        owner: "debruyne@gmail.com",
-        tags: ["space", "earth", "future"],
-      },
-    ];
+    // const demoWallpapers = [
+    //   {
+    //     title: "Desert Dunes",
+    //     slug: "desert-dunes",
+    //     category: "nature",
+    //     description: "Golden sand dunes under the afternoon sun",
+    //     imageUrl:
+    //       "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1920&h=1080&q=80",
+    //     width: 3840,
+    //     height: 2160,
+    //     format: "jpg",
+    //     owner: "messi@gmail.com",
+    //     tags: ["desert", "nature", "4k"],
+    //   },
+    //   {
+    //     title: "Cyberpunk Street",
+    //     slug: "cyberpunk-street",
+    //     category: "gaming",
+    //     description: "Neon-lit futuristic city street",
+    //     imageUrl:
+    //       "https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1920&h=1080&q=80",
+    //     width: 3840,
+    //     height: 2160,
+    //     format: "jpg",
+    //     owner: "ronaldo@gmail.com",
+    //     tags: ["cyberpunk", "gaming", "neon"],
+    //   },
+    //   {
+    //     title: "Galaxy Horizon",
+    //     slug: "galaxy-horizon",
+    //     category: "space",
+    //     description: "Milky Way stretching over the horizon",
+    //     imageUrl:
+    //       "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=1920&h=1080&q=80",
+    //     width: 3840,
+    //     height: 2160,
+    //     format: "jpg",
+    //     owner: "neymar@gmail.com",
+    //     tags: ["space", "galaxy", "4k"],
+    //   },
+    //   {
+    //     title: "Tokyo Rain",
+    //     slug: "tokyo-rain",
+    //     category: "anime",
+    //     description: "Rainy city street inspired by anime aesthetics",
+    //     imageUrl:
+    //       "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1920&h=1080&q=80",
+    //     width: 1920,
+    //     height: 1080,
+    //     format: "jpg",
+    //     owner: "mbappe@gmail.com",
+    //     tags: ["anime", "rain", "city"],
+    //   },
+    //   {
+    //     title: "Luxury Supercar",
+    //     slug: "luxury-supercar",
+    //     category: "cars",
+    //     description: "Exotic supercar parked near skyscrapers",
+    //     imageUrl:
+    //       "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1920&h=1080&q=80",
+    //     width: 3840,
+    //     height: 2160,
+    //     format: "jpg",
+    //     owner: "haaland@gmail.com",
+    //     tags: ["car", "sports", "4k"],
+    //   },
+    //   {
+    //     title: "Dark AMOLED Mountain",
+    //     slug: "dark-amoled-mountain",
+    //     category: "minimal",
+    //     description: "Minimal mountain silhouette on black background",
+    //     imageUrl:
+    //       "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1440&h=3200&q=80",
+    //     width: 1440,
+    //     height: 3200,
+    //     format: "jpg",
+    //     owner: "debruyne@gmail.com",
+    //     tags: ["amoled", "minimal", "dark"],
+    //   },
+    //   {
+    //     title: "Blue Abstract Flow",
+    //     slug: "blue-abstract-flow",
+    //     category: "abstract",
+    //     description: "Smooth blue flowing abstract shapes",
+    //     imageUrl:
+    //       "https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&w=1920&h=1080&q=80",
+    //     width: 2560,
+    //     height: 1440,
+    //     format: "jpg",
+    //     owner: "messi@gmail.com",
+    //     tags: ["abstract", "blue", "hd"],
+    //   },
+    //   {
+    //     title: "Snow Wolf",
+    //     slug: "snow-wolf",
+    //     category: "animals",
+    //     description: "White wolf standing in the snow",
+    //     imageUrl:
+    //       "https://images.unsplash.com/photo-1474511320723-9a56873867b5?auto=format&fit=crop&w=1920&h=1080&q=80",
+    //     width: 3840,
+    //     height: 2160,
+    //     format: "jpg",
+    //     owner: "ronaldo@gmail.com",
+    //     tags: ["wolf", "animal", "4k"],
+    //   },
+    //   {
+    //     title: "Green Matrix Code",
+    //     slug: "green-matrix-code",
+    //     category: "technology",
+    //     description: "Digital code streaming in green",
+    //     imageUrl:
+    //       "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1920&h=1080&q=80",
+    //     width: 3840,
+    //     height: 2160,
+    //     format: "jpg",
+    //     owner: "neymar@gmail.com",
+    //     tags: ["technology", "code", "dark"],
+    //   },
+    //   {
+    //     title: "Northern Lights",
+    //     slug: "northern-lights",
+    //     category: "nature",
+    //     description: "Aurora borealis over snowy landscape",
+    //     imageUrl:
+    //       "https://images.unsplash.com/photo-1483347756197-71ef80e95f73?auto=format&fit=crop&w=1920&h=1080&q=80",
+    //     width: 3840,
+    //     height: 2160,
+    //     format: "jpg",
+    //     owner: "mbappe@gmail.com",
+    //     tags: ["aurora", "nature", "4k"],
+    //   },
+    //   {
+    //     title: "Space Station View",
+    //     slug: "space-station-view",
+    //     category: "space",
+    //     description: "Earth viewed from a futuristic space station",
+    //     imageUrl:
+    //       "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1920&h=1080&q=80",
+    //     width: 3840,
+    //     height: 2160,
+    //     format: "jpg",
+    //     owner: "debruyne@gmail.com",
+    //     tags: ["space", "earth", "future"],
+    //   },
+    // ];
 
     // 👇 CLEANUP HERE
-    const seededImageUrls = demoWallpapers.map((wp) => wp.imageUrl);
+    // const seededImageUrls = demoWallpapers.map((wp) => wp.imageUrl);
 
-    await prisma.comment.deleteMany({
-      where: {
-        wallpaper: {
-          imageUrl: {
-            in: seededImageUrls,
-          },
-        },
-      },
-    });
+    // await prisma.comment.deleteMany({
+    //   where: {
+    //     wallpaper: {
+    //       imageUrl: {
+    //         in: seededImageUrls,
+    //       },
+    //     },
+    //   },
+    // });
 
-    await prisma.like.deleteMany({
-      where: {
-        wallpaper: {
-          imageUrl: {
-            in: seededImageUrls,
-          },
-        },
-      },
-    });
+    // await prisma.like.deleteMany({
+    //   where: {
+    //     wallpaper: {
+    //       imageUrl: {
+    //         in: seededImageUrls,
+    //       },
+    //     },
+    //   },
+    // });
 
-    await prisma.wallpaperTag.deleteMany({
-      where: {
-        wallpaper: {
-          imageUrl: {
-            in: seededImageUrls,
-          },
-        },
-      },
-    });
+    // await prisma.wallpaperTag.deleteMany({
+    //   where: {
+    //     wallpaper: {
+    //       imageUrl: {
+    //         in: seededImageUrls,
+    //       },
+    //     },
+    //   },
+    // });
 
-    await prisma.wallpaper.deleteMany({
-      where: {
-        imageUrl: {
-          in: seededImageUrls,
-        },
-      },
-    });
+    // await prisma.wallpaper.deleteMany({
+    //   where: {
+    //     imageUrl: {
+    //       in: seededImageUrls,
+    //     },
+    //   },
+    // });
 
-    console.log("🧹 Cleaned existing demo data");
+    // console.log("🧹 Cleaned existing demo data");
 
-    const createdWallpapers = [];
+    // const createdWallpapers = [];
 
-    for (const dw of demoWallpapers) {
-      const wallpaper = await prisma.wallpaper.create({
-        data: {
-          title: dw.title,
-          slug: dw.slug,
-          description: dw.description,
-          imageUrl: dw.imageUrl,
-          thumbnailUrl: dw.imageUrl.replace("w=1920", "w=480"),
+    // for (const dw of demoWallpapers) {
+    //   const wallpaper = await prisma.wallpaper.create({
+    //     data: {
+    //       title: dw.title,
+    //       slug: dw.slug,
+    //       description: dw.description,
+    //       imageUrl: dw.imageUrl,
+    //       thumbnailUrl: dw.imageUrl.replace("w=1920", "w=480"),
 
-          width: dw.width,
-          height: dw.height,
-          format: dw.format,
+    //       width: dw.width,
+    //       height: dw.height,
+    //       format: dw.format,
 
-          fileSize: Math.floor(Math.random() * 5000000) + 500000,
-          isPublic: true,
-          isFeatured: Math.random() > 0.7,
+    //       fileSize: Math.floor(Math.random() * 5000000) + 500000,
+    //       isPublic: true,
+    //       isFeatured: Math.random() > 0.7,
 
-          category: {
-            connect: {
-              id: categoryMap[dw.category],
-            },
-          },
+    //       category: {
+    //         connect: {
+    //           id: categoryMap[dw.category],
+    //         },
+    //       },
 
-          user: {
-            connect: {
-              id: userMap[dw.owner],
-            },
-          },
+    //       user: {
+    //         connect: {
+    //           id: userMap[dw.owner],
+    //         },
+    //       },
 
-          wallpaperTags: {
-            create: dw.tags
-              .filter((tag) => tagMap[tag])
-              .map((tag) => ({
-                tag: {
-                  connect: {
-                    id: tagMap[tag],
-                  },
-                },
-              })),
-          },
-        },
-      });
+    //       wallpaperTags: {
+    //         create: dw.tags
+    //           .filter((tag) => tagMap[tag])
+    //           .map((tag) => ({
+    //             tag: {
+    //               connect: {
+    //                 id: tagMap[tag],
+    //               },
+    //             },
+    //           })),
+    //       },
+    //     },
+    //   });
 
-      createdWallpapers.push(wallpaper);
-    }
+    //   createdWallpapers.push(wallpaper);
+    // }
 
-    console.log(`Seeded ${createdWallpapers.length} wallpapers`);
+    // console.log(`Seeded ${createdWallpapers.length} wallpapers`);
 
-    const comments = [
-      "Amazing wallpaper! 🔥",
-      "This looks beautiful.",
-      "Perfect for my desktop background.",
-      "Love the colors in this image.",
-      "One of the best wallpapers I've seen.",
-      "Great composition and quality.",
-      "Downloading this right now!",
-      "Looks stunning in 4K.",
-      "Very relaxing wallpaper.",
-      "Awesome shot!",
-      "This is my favorite wallpaper.",
-      "Fantastic work!",
-      "Clean and minimal design.",
-      "Absolutely gorgeous.",
-      "Really impressive image.",
-    ];
+    // const comments = [
+    //   "Amazing wallpaper! 🔥",
+    //   "This looks beautiful.",
+    //   "Perfect for my desktop background.",
+    //   "Love the colors in this image.",
+    //   "One of the best wallpapers I've seen.",
+    //   "Great composition and quality.",
+    //   "Downloading this right now!",
+    //   "Looks stunning in 4K.",
+    //   "Very relaxing wallpaper.",
+    //   "Awesome shot!",
+    //   "This is my favorite wallpaper.",
+    //   "Fantastic work!",
+    //   "Clean and minimal design.",
+    //   "Absolutely gorgeous.",
+    //   "Really impressive image.",
+    // ];
 
-    const commentData: {
-      userId: string;
-      wallpaperId: string;
-      opinion: string;
-    }[] = [];
+    // const commentData: {
+    //   userId: string;
+    //   wallpaperId: string;
+    //   opinion: string;
+    // }[] = [];
 
-    for (const wallpaper of createdWallpapers) {
-      const commentCount = Math.floor(Math.random() * 4) + 2;
+    // for (const wallpaper of createdWallpapers) {
+    //   const commentCount = Math.floor(Math.random() * 4) + 2;
 
-      const availableUsers = [...seededUsers].sort(() => Math.random() - 0.5);
+    //   const availableUsers = [...seededUsers].sort(() => Math.random() - 0.5);
 
-      const selectedUsers = availableUsers.slice(0, commentCount);
+    //   const selectedUsers = availableUsers.slice(0, commentCount);
 
-      for (const user of selectedUsers) {
-        commentData.push({
-          userId: user.id,
-          wallpaperId: wallpaper.id,
-          opinion: comments[Math.floor(Math.random() * comments.length)],
-        });
-      }
-    }
+    //   for (const user of selectedUsers) {
+    //     commentData.push({
+    //       userId: user.id,
+    //       wallpaperId: wallpaper.id,
+    //       opinion: comments[Math.floor(Math.random() * comments.length)],
+    //     });
+    //   }
+    // }
 
-    await prisma.comment.createMany({
-      data: commentData,
-    });
+    // await prisma.comment.createMany({
+    //   data: commentData,
+    // });
 
-    const likeData: {
-      userId: string;
-      wallpaperId: string;
-    }[] = [];
+    // const likeData: {
+    //   userId: string;
+    //   wallpaperId: string;
+    // }[] = [];
 
-    const usedPairs = new Set<string>();
+    // const usedPairs = new Set<string>();
 
-    for (const wallpaper of createdWallpapers) {
-      const likeCount = Math.floor(Math.random() * seededUsers.length) + 1;
+    // for (const wallpaper of createdWallpapers) {
+    //   const likeCount = Math.floor(Math.random() * seededUsers.length) + 1;
 
-      const shuffledUsers = [...seededUsers].sort(() => Math.random() - 0.5);
+    //   const shuffledUsers = [...seededUsers].sort(() => Math.random() - 0.5);
 
-      const selectedUsers = shuffledUsers.slice(0, likeCount);
+    //   const selectedUsers = shuffledUsers.slice(0, likeCount);
 
-      for (const user of selectedUsers) {
-        const key = `${user.id}-${wallpaper.id}`;
+    //   for (const user of selectedUsers) {
+    //     const key = `${user.id}-${wallpaper.id}`;
 
-        if (!usedPairs.has(key)) {
-          usedPairs.add(key);
+    //     if (!usedPairs.has(key)) {
+    //       usedPairs.add(key);
 
-          likeData.push({
-            userId: user.id,
-            wallpaperId: wallpaper.id,
-          });
-        }
-      }
-    }
+    //       likeData.push({
+    //         userId: user.id,
+    //         wallpaperId: wallpaper.id,
+    //       });
+    //     }
+    //   }
+    // }
 
-    await prisma.like.createMany({
-      data: likeData,
-    });
+    // await prisma.like.createMany({
+    //   data: likeData,
+    // });
 
-    console.log(`✅ Seeded ${likeData.length} likes`);
+    // console.log(`✅ Seeded ${likeData.length} likes`);
 
-    console.log(`✅ Seeded ${commentData.length} comments`);
+    // console.log(`✅ Seeded ${commentData.length} comments`);
   } catch (error) {
     console.error("Error during seeding:", error);
     throw error;

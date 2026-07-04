@@ -122,10 +122,10 @@ const wallpaperUploadAction = async (formData: FormData) => {
 
     const imgId = `${randomUUID().slice(0, 8)}.${extension}`;
 
-    // image path
-    filePath = `./public/wallpapers/${imgId}`;
+    // original image file path
+    filePath = `./public/wallpapers/posts/${imgId}`;
 
-    // Save image
+    // Save original image
     await sharp(buffer).toFile(filePath);
 
     // convert tittle in to slug
@@ -174,7 +174,7 @@ const wallpaperUploadAction = async (formData: FormData) => {
   } catch (error) {
     console.error(error);
 
-    // Delete image if DB failed
+    // Delete original image if DB failed
     if (filePath) {
       await fs.unlink(filePath).catch(() => {});
     }

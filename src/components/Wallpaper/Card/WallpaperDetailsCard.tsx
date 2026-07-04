@@ -1,5 +1,38 @@
 "use client";
 
+import UserAvatar from "@/components/Dashboard/UserAvatar";
+import { Button, buttonVariants } from "@/components/shadcnui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/shadcnui/card";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/shadcnui/collapsible";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/shadcnui/dialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/shadcnui/dropdown-menu";
+import { Skeleton } from "@/components/shadcnui/skeleton";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/shadcnui/tooltip";
+import CommentBox from "@/components/Wallpaper/Actions/CommentBox";
 import { authClient } from "@/lib/auth-client";
 import formatFileSize from "@/lib/formatFileSize";
 import { WallpaperDetailsCardType } from "@/lib/type";
@@ -14,34 +47,9 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import DeleteCommentButton from "../Buttons/DeleteCommentButton";
-import LikeButton from "../Buttons/LikeButton";
-import SaveButton from "../Buttons/SaveButton";
-import CommentBox from "../Dashboard/CommentBox";
-import UserAvatar from "../Dashboard/UserAvatar";
-import { Button, buttonVariants } from "../shadcnui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "../shadcnui/card";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "../shadcnui/collapsible";
-import { Dialog, DialogContent, DialogTrigger } from "../shadcnui/dialog";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "../shadcnui/dropdown-menu";
-import { Skeleton } from "../shadcnui/skeleton";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../shadcnui/tooltip";
+import DeleteCommentButton from "../Actions/DeleteCommentButton";
+import LikeButton from "../Actions/LikeButton";
+import SaveButton from "../Actions/SaveButton";
 
 type WallpaperDetailsCardProps = {
   getDetails: WallpaperDetailsCardType;
@@ -87,11 +95,7 @@ const WallpaperDetailsCard = ({
             onOpenChange={setOpen}>
             <DialogTrigger>
               <Image
-                src={
-                  getDetails.imageUrl.startsWith("https") ?
-                    getDetails.imageUrl
-                  : `/wallpapers/${getDetails.imageUrl}`
-                }
+                src={`/wallpapers/posts/${getDetails.imageUrl}`}
                 alt={`image - ${getDetails.title}`}
                 height={getDetails.height ?? 800}
                 width={getDetails.width ?? 1200}

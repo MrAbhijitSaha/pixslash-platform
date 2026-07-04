@@ -5,8 +5,8 @@ import { Trash2Icon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { Button } from "../shadcnui/button";
-import { Spinner } from "../shadcnui/spinner";
+import { Button } from "../../shadcnui/button";
+import { Spinner } from "../../shadcnui/spinner";
 
 type DeleteCommentButtonProps = {
   commentId: string;

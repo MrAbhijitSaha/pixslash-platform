@@ -3,7 +3,7 @@ import prisma from "@/lib/database/dbClient";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Upload Wallpaper",
+  title: "Upload Wallpaper | PixSlash",
   description:
     "Upload high-quality wallpapers to share with the PixSlash community.",
   robots: {

@@ -6,8 +6,12 @@ import { HeartIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { ReactNode, useState } from "react";
 import { toast } from "react-toastify";
-import { Button } from "../shadcnui/button";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../shadcnui/tooltip";
+import { Button } from "../../shadcnui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "../../shadcnui/tooltip";
 
 type LikeButtonProps = {
   tooltipContent?: ReactNode;
