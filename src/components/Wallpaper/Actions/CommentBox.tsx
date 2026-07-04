@@ -8,11 +8,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { Controller, useForm, useWatch } from "react-hook-form";
 import { toast } from "react-toastify";
-import { Button } from "../shadcnui/button";
-import { Field, FieldError } from "../shadcnui/field";
-import { Input } from "../shadcnui/input";
-import { Spinner } from "../shadcnui/spinner";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../shadcnui/tooltip";
+import { Button } from "../../shadcnui/button";
+import { Field, FieldError } from "../../shadcnui/field";
+import { Input } from "../../shadcnui/input";
+import { Spinner } from "../../shadcnui/spinner";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "../../shadcnui/tooltip";
 type CommentBoxProps = {
   wallpaperId: string;
 };
