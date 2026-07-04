@@ -1,5 +1,5 @@
 import { buttonVariants } from "@/components/shadcnui/button";
-import WallpaperDetailsCard from "@/components/Wallpaper/WallpaperDetailsCard";
+import WallpaperDetailsCard from "@/components/Wallpaper/Card/WallpaperDetailsCard";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/database/dbClient";
 import { XIcon } from "lucide-react";

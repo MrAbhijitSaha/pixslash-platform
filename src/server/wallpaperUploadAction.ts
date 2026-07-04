@@ -12,7 +12,6 @@ import slugify from "slugify";
 
 const wallpaperUploadAction = async (formData: FormData) => {
   let filePath = "";
-  let thumbnailFilePath = "";
   try {
     const session = await auth.api.getSession({
       headers: await headers(),
@@ -122,28 +121,12 @@ const wallpaperUploadAction = async (formData: FormData) => {
     const extension = metadata.format === "jpeg" ? "jpg" : metadata.format;
 
     const imgId = `${randomUUID().slice(0, 8)}.${extension}`;
-    const thumbnailId = `${randomUUID()}.${extension}`;
 
     // original image file path
     filePath = `./public/wallpapers/posts/${imgId}`;
 
-    //thumbnail image file path
-    thumbnailFilePath = `./public/wallpapers/thumbnail/${thumbnailId}`;
-
     // Save original image
     await sharp(buffer).toFile(filePath);
-
-    // Save thumbnail image
-    await sharp(buffer)
-      .resize({
-        width: 400,
-        height: 300,
-        fit: "cover",
-      })
-      .webp({
-        quality: 80,
-      })
-      .toFile(thumbnailFilePath);
 
     // convert tittle in to slug
     const slug = `${slugify(title, {
@@ -161,8 +144,6 @@ const wallpaperUploadAction = async (formData: FormData) => {
         slug,
 
         imageUrl: imgId,
-
-        thumbnailUrl: thumbnailId,
 
         categoryId,
 
@@ -195,11 +176,6 @@ const wallpaperUploadAction = async (formData: FormData) => {
 
     // Delete original image if DB failed
     if (filePath) {
-      await fs.unlink(filePath).catch(() => {});
-    }
-
-    // Delete thumbnail image if DB failed
-    if (thumbnailFilePath) {
       await fs.unlink(filePath).catch(() => {});
     }
 

@@ -56,7 +56,10 @@ export type WallpaperCardUserProps = Prisma.WallpaperGetPayload<{
       };
     };
   };
-}>;
+}> & {
+  isLiked: boolean;
+  isSaved: boolean;
+};
 
 export type WallpaperDetailsCardType = Prisma.WallpaperGetPayload<{
   omit: {
