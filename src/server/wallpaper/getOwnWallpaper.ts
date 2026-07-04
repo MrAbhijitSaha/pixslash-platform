@@ -1,15 +1,18 @@
 "use server";
 
+import { auth } from "@/lib/auth";
 import prisma from "@/lib/database/dbClient";
+import { headers } from "next/headers";
 
-type GetOwnWallpaperProps = {
-  userId?: string;
-};
+const getOwnWallpaper = async () => {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
 
-const getOwnWallpaper = async ({ userId }: GetOwnWallpaperProps) => {
+  const userId = session?.session.userId;
+
   if (!userId) return [];
 
-  // User's own wallpapers
   const wallpapers = await prisma.wallpaper.findMany({
     where: {
       userId,
@@ -33,24 +36,14 @@ const getOwnWallpaper = async ({ userId }: GetOwnWallpaperProps) => {
     },
   });
 
-  // User likes & saves
   const [likes, saves] = await Promise.all([
     prisma.like.findMany({
-      where: {
-        userId,
-      },
-      select: {
-        wallpaperId: true,
-      },
+      where: { userId },
+      select: { wallpaperId: true },
     }),
-
     prisma.savedPost.findMany({
-      where: {
-        userId,
-      },
-      select: {
-        wallpaperId: true,
-      },
+      where: { userId },
+      select: { wallpaperId: true },
     }),
   ]);
 

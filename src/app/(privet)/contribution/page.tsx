@@ -1,23 +1,12 @@
 import { buttonVariants } from "@/components/shadcnui/button";
 import { Card, CardDescription, CardTitle } from "@/components/shadcnui/card";
 import MasonryWallpaperGrid from "@/components/Wallpaper/Grid/MaonaryWallpaperGrid";
-import { auth } from "@/lib/auth";
 import getOwnWallpaper from "@/server/wallpaper/getOwnWallpaper";
 import { PlusIcon } from "lucide-react";
-import { headers } from "next/headers";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 
 const page = async () => {
-  const session = await auth.api.getSession({ headers: await headers() });
-
-  if (!session) {
-    return notFound();
-  }
-
-  const getOwnPost = await getOwnWallpaper({
-    userId: session.session.userId,
-  });
+  const getOwnPost = await getOwnWallpaper();
 
   return (
     <section className="space-y-3 px-6 pt-4">

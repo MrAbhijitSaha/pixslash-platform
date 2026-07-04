@@ -437,7 +437,7 @@ const main = async () => {
     //   },
     // });
 
-    console.log("🧹 Cleaned existing demo data");
+    // console.log("🧹 Cleaned existing demo data");
 
     // const createdWallpapers = [];
 

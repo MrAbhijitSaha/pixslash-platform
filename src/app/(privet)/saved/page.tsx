@@ -38,7 +38,7 @@ const page = async () => {
         </p>
       </div>
 
-      {getSavePost.length === 0 && (
+      {getSavePost.length === 0 ?
         <Card className="grid place-items-center gap-2 py-8">
           <BookmarkIcon />
           <CardTitle>No Saved wallpapers yet</CardTitle>
@@ -51,8 +51,7 @@ const page = async () => {
             Browse Wallpapers
           </Link>
         </Card>
-      )}
-      {getSavePost.length === 1 || getSavePost.length === 2 ?
+      : getSavePost.length <= 2 ?
         <section className="grid grid-cols-3">
           <MasonryWallpaperGrid wallpapers={getSavePost} />
         </section>

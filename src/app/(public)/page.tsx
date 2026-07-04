@@ -1,8 +1,6 @@
 import MasonryWallpaperGrid from "@/components/Wallpaper/Grid/MaonaryWallpaperGrid";
-import { auth } from "@/lib/auth";
 import getAllWallpaper from "@/server/wallpaper/getAllWallpaper";
 import { Metadata } from "next";
-import { headers } from "next/headers";
 
 export const metadata: Metadata = {
   title: "Stunning Free Wallpapers & Images | Pixslash",
@@ -11,13 +9,7 @@ export const metadata: Metadata = {
 };
 
 const page = async () => {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
-  const getAllWallpapers = await getAllWallpaper({
-    userId: session?.session.userId,
-  });
+  const getAllWallpapers = await getAllWallpaper();
 
   if (getAllWallpapers.length === 0) {
     return (

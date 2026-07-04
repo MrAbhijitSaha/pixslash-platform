@@ -1,13 +1,17 @@
 "use server";
 
+import { auth } from "@/lib/auth";
 import prisma from "@/lib/database/dbClient";
+import { headers } from "next/headers";
 
-type GetAllWallpapersProps = {
-  userId?: string;
-};
+const getAllWallpaper = async () => {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
 
-const getAllWallpaper = async ({ userId }: GetAllWallpapersProps) => {
-  // 1. Get all public wallpapers
+  const userId = session?.session.userId;
+
+  // Get all public wallpapers
   const wallpapers = await prisma.wallpaper.findMany({
     where: {
       isPublic: true,
@@ -31,7 +35,6 @@ const getAllWallpaper = async ({ userId }: GetAllWallpapersProps) => {
     },
   });
 
-  // Guest user
   if (!userId) {
     return wallpapers.map((wallpaper) => ({
       ...wallpaper,
@@ -40,33 +43,20 @@ const getAllWallpaper = async ({ userId }: GetAllWallpapersProps) => {
     }));
   }
 
-  // 2. Fetch all likes & saves in parallel
   const [likes, saves] = await Promise.all([
     prisma.like.findMany({
-      where: {
-        userId,
-      },
-      select: {
-        wallpaperId: true,
-      },
+      where: { userId },
+      select: { wallpaperId: true },
     }),
-
     prisma.savedPost.findMany({
-      where: {
-        userId,
-      },
-      select: {
-        wallpaperId: true,
-      },
+      where: { userId },
+      select: { wallpaperId: true },
     }),
   ]);
 
-  // 3. Convert to Set for O(1) lookup
   const likedIds = new Set(likes.map((like) => like.wallpaperId));
-
   const savedIds = new Set(saves.map((save) => save.wallpaperId));
 
-  // 4. Merge
   return wallpapers.map((wallpaper) => ({
     ...wallpaper,
     isLiked: likedIds.has(wallpaper.id),
