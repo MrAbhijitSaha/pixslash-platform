@@ -1,5 +1,12 @@
 import AddImage from "@/components/Profile/AddImage";
-import { Card, CardDescription, CardTitle } from "@/components/shadcnui/card";
+import AddProfileInformation from "@/components/Profile/AddProfileInformation";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/shadcnui/card";
 import { Separator } from "@/components/shadcnui/separator";
 import prisma from "@/lib/database/dbClient";
 import getUserProfile from "@/server/profile/getUserProfile";
@@ -23,7 +30,7 @@ export const generateMetadata = async ({
     },
     select: {
       name: true,
-      Bio: true,
+      bio: true,
     },
   });
 
@@ -33,7 +40,9 @@ export const generateMetadata = async ({
 
   return {
     title: `Profile | ${user.name} `,
-    description: user.Bio,
+    description:
+      user.bio ??
+      `Explore ${user.name}'s profile on PixSlash. Discover high-quality wallpapers, uploads, collections, and creative contributions.`,
   };
 };
 
@@ -48,7 +57,7 @@ const Page = async ({ params }: PageProps) => {
 
   return (
     <section className="grid place-items-center px-6">
-      <div className="w-full max-w-2xl space-y-4">
+      <div className="w-full max-w-2xl space-y-6">
         {/* Heading of  the page  */}
         <Card className="gap-0 bg-transparent py-0 pt-4 ring-0">
           <CardTitle className="text-3xl font-bold">Profile</CardTitle>
@@ -60,6 +69,23 @@ const Page = async ({ params }: PageProps) => {
         <Separator />
 
         <AddImage info={userInfo} />
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-2xl font-semibold">
+              Profile Information
+            </CardTitle>
+          </CardHeader>
+
+          <CardContent>
+            <div className="mb-4">
+              <CardTitle>Email</CardTitle>
+              <CardDescription>{userInfo.email}</CardDescription>
+            </div>
+
+            <AddProfileInformation info={userInfo} />
+          </CardContent>
+        </Card>
       </div>
     </section>
   );

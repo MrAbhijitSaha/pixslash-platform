@@ -61,3 +61,27 @@ export const wallpaperUploadSchema = z.object({
 
   category: z.string().min(1, "Please choose your wallpaper category"),
 });
+
+export const profileInformationSchema = z.object({
+  // email: z.email(),
+
+  name: z
+    .string()
+    .trim()
+    .min(5, { error: "Name must be at least 5 characters long" })
+    .max(32, "Name must not exceed 32 characters"),
+
+  mobileNumber: z
+    .string()
+    .length(10, "Invaild number")
+    .optional()
+    .or(z.literal("")),
+
+  bio: z
+    .string()
+    .trim()
+    .min(10, "Bio must be at least 10 characters long")
+    .max(100, "Bio must not exceed 100 characters")
+    .optional()
+    .or(z.literal("")),
+});

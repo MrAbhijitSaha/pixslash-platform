@@ -32,7 +32,7 @@ const getUserProfile = async ({ userId }: GetUserProfileProps) => {
     },
     select: {
       id: true,
-      Bio: true,
+      bio: true,
       image: true,
       name: true,
       mobileNumber: true,
