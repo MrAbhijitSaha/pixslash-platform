@@ -1,6 +1,9 @@
-import { auth } from "@/lib/auth";
+import AddImage from "@/components/Profile/AddImage";
+import { Card, CardDescription, CardTitle } from "@/components/shadcnui/card";
+import { Separator } from "@/components/shadcnui/separator";
 import prisma from "@/lib/database/dbClient";
-import { headers } from "next/headers";
+import getUserProfile from "@/server/profile/getUserProfile";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 type PageProps = {
@@ -9,24 +12,18 @@ type PageProps = {
   }>;
 };
 
-const Page = async ({ params }: PageProps) => {
+export const generateMetadata = async ({
+  params,
+}: PageProps): Promise<Metadata> => {
   const { userId } = await params;
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
 
-  if (!session || session.user.id !== userId) {
-    notFound();
-  }
-
-  const user = await prisma.user.findUnique({
+  const user = await prisma.user.findUniqueOrThrow({
     where: {
-      id: session.user.id,
+      id: userId,
     },
     select: {
       name: true,
-      email: true,
-      image: true,
+      Bio: true,
     },
   });
 
@@ -34,11 +31,35 @@ const Page = async ({ params }: PageProps) => {
     notFound();
   }
 
+  return {
+    title: `Profile | ${user.name} `,
+    description: user.Bio,
+  };
+};
+
+const Page = async ({ params }: PageProps) => {
+  const { userId } = await params;
+
+  const userInfo = await getUserProfile({ userId });
+
+  if (!userInfo) {
+    return notFound();
+  }
+
   return (
-    <section className="grid h-dvh place-items-center">
-      <div>
-        <h1 className="text-3xl font-bold">{user.name}</h1>
-        <p>{user.email}</p>
+    <section className="grid place-items-center px-6">
+      <div className="w-full max-w-2xl space-y-4">
+        {/* Heading of  the page  */}
+        <Card className="gap-0 bg-transparent py-0 pt-4 ring-0">
+          <CardTitle className="text-3xl font-bold">Profile</CardTitle>
+          <CardDescription className="md:text-[16px]">
+            Manage your profile information and account settings.
+          </CardDescription>
+        </Card>
+
+        <Separator />
+
+        <AddImage info={userInfo} />
       </div>
     </section>
   );
