@@ -22,6 +22,7 @@ const CategorySlider = ({ categoryInfo, chechklogin }: CategorySliderProps) => {
       <button
         type="button"
         title="prev"
+        aria-label="Previous category"
         className="category-prev absolute top-1/2 left-0 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center">
         <ChevronLeft className="h-5 w-5" />
       </button>
@@ -58,6 +59,7 @@ const CategorySlider = ({ categoryInfo, chechklogin }: CategorySliderProps) => {
       <button
         type="button"
         title="next"
+        aria-label="Next category"
         className="category-next absolute top-1/2 right-0 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full">
         <ChevronRight className="h-5 w-5" />
       </button>

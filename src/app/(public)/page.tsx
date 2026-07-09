@@ -15,8 +15,8 @@ export const metadata: Metadata = {
 
 const page = async () => {
   const [getAllWallpapers, getCategory] = await Promise.all([
-    await getAllWallpaper(),
-    await prisma.category.findMany(),
+    getAllWallpaper(),
+    prisma.category.findMany(),
   ]);
 
   const session = await auth.api.getSession({
@@ -44,7 +44,7 @@ const page = async () => {
 
       <Separator />
 
-      {getCategory && (
+      {getCategory.length > 0 && (
         <section className={isLogin ? "md:max-w-lg lg:max-w-4xl" : ""}>
           <h2 className="pt-4 text-2xl">Popular Wallpaper Categories</h2>
           <CategorySlider
