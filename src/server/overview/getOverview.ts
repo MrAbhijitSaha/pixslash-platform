@@ -79,6 +79,14 @@ const getOverview = async () => {
     return d;
   });
 
+  // format local date label (YYYY-MM-DD) to avoid UTC shift when using toISOString()
+  const formatLocalDate = (dt: Date) => {
+    const y = dt.getFullYear();
+    const m = String(dt.getMonth() + 1).padStart(2, "0");
+    const day = String(dt.getDate()).padStart(2, "0");
+    return `${y}-${m}-${day}`;
+  };
+
   const likes = await prisma.like.findMany({
     where: {
       wallpaper: { userId },
@@ -101,7 +109,7 @@ const getOverview = async () => {
     const count = likes.filter(
       (l) => new Date(l.createdAt) >= d && new Date(l.createdAt) < next,
     ).length;
-    return { date: d.toISOString().slice(0, 10), count };
+    return { date: formatLocalDate(d), count };
   });
 
   const commentsByDay = days.map((d) => {
@@ -110,7 +118,7 @@ const getOverview = async () => {
     const count = comments.filter(
       (c) => new Date(c.createdAt) >= d && new Date(c.createdAt) < next,
     ).length;
-    return { date: d.toISOString().slice(0, 10), count };
+    return { date: formatLocalDate(d), count };
   });
 
   return {

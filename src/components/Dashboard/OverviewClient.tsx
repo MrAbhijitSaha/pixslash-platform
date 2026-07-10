@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import { useEffect, useState } from "react";
 
 type Activity = {
   id: string;
@@ -12,28 +12,26 @@ type Activity = {
 };
 
 export default function OverviewClient({ initial }: { initial: Activity[] }) {
-  const [activities, setActivities] = React.useState<Activity[]>(initial || []);
+  const [activities, setActivities] = useState<Activity[]>(initial || []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     let mounted = true;
     const fetchLatest = async () => {
       try {
-        const res = await fetch("/api/overview");
+        const res = await fetch("/api/overview/recent-activities");
         if (!res.ok) return;
         const json = await res.json();
         if (!mounted) return;
         setActivities(json.recentActivities || []);
       } catch (e) {
-        // noop
+        console.log(e);
       }
     };
 
-    const id = setInterval(fetchLatest, 10000);
     // initial fetch
     fetchLatest();
     return () => {
       mounted = false;
-      clearInterval(id);
     };
   }, []);
 
