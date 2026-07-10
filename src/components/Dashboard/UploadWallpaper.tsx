@@ -58,7 +58,7 @@ const UploadWallpaper = ({ categoryInfo, tagInfo }: UploadWallpaperType) => {
   const {
     handleSubmit,
     control,
-    formState: { isSubmitting, isValid, isDirty },
+    formState: { isSubmitting, isDirty, dirtyFields },
     reset,
   } = useForm({
     resolver: zodResolver(wallpaperUploadSchema),
@@ -72,6 +72,8 @@ const UploadWallpaper = ({ categoryInfo, tagInfo }: UploadWallpaperType) => {
 
     mode: "onChange",
   });
+
+  const requiredFieldsDirty = dirtyFields.title && dirtyFields.category;
 
   //   file picker initilization
   const { openFilePicker, filesContent, plainFiles, clear } = useFilePicker({
@@ -197,7 +199,7 @@ const UploadWallpaper = ({ categoryInfo, tagInfo }: UploadWallpaperType) => {
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
                   <FieldLabel htmlFor={field.name}>
-                    Title: <span className="text-red-400">*</span>
+                    Title <span className="text-red-400">*</span>
                   </FieldLabel>
                   <Input
                     {...field}
@@ -221,9 +223,7 @@ const UploadWallpaper = ({ categoryInfo, tagInfo }: UploadWallpaperType) => {
               control={control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor={field.name}>
-                    Description: <span className="text-red-400">*</span>
-                  </FieldLabel>
+                  <FieldLabel htmlFor={field.name}>Description</FieldLabel>
                   <Textarea
                     {...field}
                     id={field.name}
@@ -378,7 +378,7 @@ const UploadWallpaper = ({ categoryInfo, tagInfo }: UploadWallpaperType) => {
             <Button
               type="submit"
               className="w-full"
-              disabled={!isValid || !isFile || isSubmitting}>
+              disabled={!requiredFieldsDirty || !isFile || isSubmitting}>
               {isSubmitting ?
                 <>
                   <Spinner /> Uploading ...

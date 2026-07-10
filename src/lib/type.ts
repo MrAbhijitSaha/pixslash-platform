@@ -3,8 +3,10 @@ import { LucideIcon } from "lucide-react";
 import { ReactNode } from "react";
 import z from "zod";
 import {
+  changePasswordSchema,
   commentSchema,
   loginSchema,
+  profileInformationSchema,
   registerSchema,
   wallpaperUploadSchema,
 } from "./zodSchema";
@@ -24,6 +26,12 @@ export type LoginSchemaType = z.infer<typeof loginSchema>;
 export type CommentSchemaType = z.infer<typeof commentSchema>;
 
 export type WallpaperUploadSchemaType = z.infer<typeof wallpaperUploadSchema>;
+
+export type ProfileInformationSchemaType = z.infer<
+  typeof profileInformationSchema
+>;
+
+export type ChangePasswordSchemaType = z.infer<typeof changePasswordSchema>;
 
 export type SideBarNavItemType = {
   label: string;

@@ -23,6 +23,9 @@ const getCategoiesWiseWallpaper = async ({
       category: {
         slug,
       },
+      user: {
+        isNot: null,
+      },
     },
 
     include: {
