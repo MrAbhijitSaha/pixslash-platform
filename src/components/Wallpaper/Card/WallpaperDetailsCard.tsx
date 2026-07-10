@@ -45,7 +45,6 @@ import {
   User,
 } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
 import DeleteCommentButton from "../Actions/DeleteCommentButton";
 import LikeButton from "../Actions/LikeButton";
@@ -99,22 +98,20 @@ const WallpaperDetailsCard = ({
                 alt={`image - ${getDetails.title}`}
                 height={getDetails.height ?? 800}
                 width={getDetails.width ?? 1200}
+                loading="eager"
                 className="h-auto w-full cursor-zoom-in rounded-lg object-contain md:h-94"
               />
             </DialogTrigger>
 
-            <DialogContent className="w-full! max-w-5xl! p-0">
+            <DialogContent className="w-full! max-w-5xl! py-6">
               <Image
-                src={
-                  getDetails.imageUrl.startsWith("https") ?
-                    getDetails.imageUrl
-                  : `/wallpapers/${getDetails.imageUrl}`
-                }
+                src={`/wallpapers/posts/${getDetails.imageUrl}`}
                 alt={`image - ${getDetails.title}`}
                 height={getDetails.height ?? 800}
                 width={getDetails.width ?? 1200}
                 onClick={() => setOpen(false)}
-                className="h-auto w-full cursor-zoom-out rounded-lg object-contain"
+                loading="lazy"
+                className="h-140 w-full cursor-zoom-out rounded-lg object-contain"
               />
             </DialogContent>
           </Dialog>
@@ -171,18 +168,20 @@ const WallpaperDetailsCard = ({
           </div>
         </div>
 
-        <CardTitle>Tags </CardTitle>
-
-        <div className="space-x-3">
-          {getDetails.wallpaperTags.map((wt) => (
-            <Link
-              href={`/tag/${wt.tag.slug}`}
-              key={wt.tag.id}
-              className={buttonVariants({ variant: "default" })}>
-              {wt.tag.title}
-            </Link>
-          ))}
-        </div>
+        {getDetails.wallpaperTags.length !== 0 && (
+          <>
+            <CardTitle>Tags </CardTitle>
+            <div className="space-x-3">
+              {getDetails.wallpaperTags.map((wt) => (
+                <div
+                  key={wt.tag.id}
+                  className={buttonVariants({ variant: "default" })}>
+                  {wt.tag.title}
+                </div>
+              ))}
+            </div>
+          </>
+        )}
       </CardContent>
       <Collapsible>
         {/* Comment section  */}

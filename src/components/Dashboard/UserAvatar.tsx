@@ -16,7 +16,7 @@ const UserAvatar = ({ name, image, size }: UserAvatarProps) => {
   return (
     <Avatar size={size}>
       <AvatarImage
-        src={image ?? undefined}
+        src={`/user/profilepicture/${image}`}
         height={24}
         width={24}
         alt={name ? `${name} avatar` : "User avatar"}

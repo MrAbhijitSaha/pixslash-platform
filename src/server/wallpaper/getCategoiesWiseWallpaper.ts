@@ -4,21 +4,30 @@ import { auth } from "@/lib/auth";
 import prisma from "@/lib/database/dbClient";
 import { headers } from "next/headers";
 
-const getAllWallpaper = async () => {
+type GetCategoiesWiseWallpaperProps = {
+  slug: string;
+};
+
+const getCategoiesWiseWallpaper = async ({
+  slug,
+}: GetCategoiesWiseWallpaperProps) => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
 
   const userId = session?.session.userId;
 
-  // Get all public wallpapers
+  // get wallpaper depend on category
   const wallpapers = await prisma.wallpaper.findMany({
     where: {
-      isPublic: true,
+      category: {
+        slug,
+      },
       user: {
         isNot: null,
       },
     },
+
     include: {
       user: {
         select: {
@@ -67,4 +76,4 @@ const getAllWallpaper = async () => {
   }));
 };
 
-export default getAllWallpaper;
+export default getCategoiesWiseWallpaper;
