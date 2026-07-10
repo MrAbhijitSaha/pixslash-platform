@@ -1,6 +1,7 @@
 import AddImage from "@/components/Profile/AddImage";
 import AddProfileInformation from "@/components/Profile/AddProfileInformation";
 import ChangePassword from "@/components/Profile/ChangePassword";
+import DeleteAcount from "@/components/Profile/DeleteAcount";
 import {
   Card,
   CardContent,
@@ -11,6 +12,7 @@ import {
 import { Separator } from "@/components/shadcnui/separator";
 import prisma from "@/lib/database/dbClient";
 import getUserProfile from "@/server/profile/getUserProfile";
+import { Trash2Icon } from "lucide-react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -58,7 +60,7 @@ const Page = async ({ params }: PageProps) => {
 
   return (
     <section className="grid place-items-center px-6">
-      <div className="w-full max-w-2xl space-y-6">
+      <div className="w-full max-w-2xl space-y-6 pb-6">
         {/* Heading of  the page  */}
         <Card className="gap-0 bg-transparent py-0 pt-4 ring-0">
           <CardTitle className="text-3xl font-bold">Profile</CardTitle>
@@ -100,6 +102,28 @@ const Page = async ({ params }: PageProps) => {
 
           <CardContent>
             <ChangePassword />
+          </CardContent>
+        </Card>
+
+        {/* Delete Account  */}
+
+        <Card className="">
+          <CardHeader className="flex items-center gap-3 text-red-400">
+            <Trash2Icon />
+            <CardTitle className="mt-1 text-xl font-semibold">
+              Danger Zone
+            </CardTitle>
+          </CardHeader>
+
+          <CardContent>
+            <CardDescription>
+              Once you delete your account, there is no going back. All your
+              wallpapers, collections, and data will be permanently removed.
+            </CardDescription>
+
+            <div className="mt-4 flex justify-end">
+              <DeleteAcount />
+            </div>
           </CardContent>
         </Card>
       </div>

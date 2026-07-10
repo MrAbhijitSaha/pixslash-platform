@@ -47,25 +47,30 @@ export const commentSchema = z.object({
 });
 
 export const wallpaperUploadSchema = z.object({
-  title: z
-    .string()
-    .trim()
-    .min(5, { error: "Title must be at least 5 characters" }),
+  title: z.string().trim().min(5, {
+    error: "Title must be at least 5 characters",
+  }),
 
   description: z
     .string()
     .trim()
-    .min(10, { error: "Description must be at least 10 characters" })
-    .max(100, { error: "Description must not exceed 100 characters" }),
+    .max(100, {
+      error: "Description must not exceed 100 characters",
+    })
+    .refine((value) => value === "" || value.length >= 10, {
+      message: "Description must be at least 10 characters",
+    }),
 
   tags: z
     .array(z.string().trim().min(1))
-    .max(10, { error: "Maximum 10 tags are allowed" })
+    .max(10, {
+      error: "Maximum 10 tags are allowed",
+    })
     .default([]),
 
-  category: z
-    .string()
-    .min(1, { error: "Please choose your wallpaper category" }),
+  category: z.string().min(1, {
+    error: "Please choose your wallpaper category",
+  }),
 });
 
 export const profileInformationSchema = z.object({

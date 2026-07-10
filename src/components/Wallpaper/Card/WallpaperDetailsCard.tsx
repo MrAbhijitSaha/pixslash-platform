@@ -168,7 +168,7 @@ const WallpaperDetailsCard = ({
           </div>
         </div>
 
-        <CardTitle>Tags </CardTitle>
+        {getDetails.wallpaperTags.length !== 0 && <CardTitle>Tags </CardTitle>}
 
         <div className="space-x-3">
           {getDetails.wallpaperTags.map((wt) => (

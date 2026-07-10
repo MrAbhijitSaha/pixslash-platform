@@ -15,6 +15,9 @@ const getAllWallpaper = async () => {
   const wallpapers = await prisma.wallpaper.findMany({
     where: {
       isPublic: true,
+      user: {
+        isNot: null,
+      },
     },
     include: {
       user: {

@@ -45,7 +45,7 @@ model Session {
   userAgent String?
 
   // Relations
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId String
 
   @@unique([token])
@@ -69,7 +69,7 @@ model Account {
   updatedAt             DateTime  @updatedAt
 
   // Relations 
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId String
 
   @@map("account")
@@ -105,11 +105,11 @@ model Wallpaper {
 
   // Relations 
   userId        String?
-  user          User?          @relation(fields: [userId], references: [id])
+  user          User?          @relation(fields: [userId], references: [id], onDelete: Cascade)
   likes         Like[]
   comments      Comment[]
   wallpaperTags WallpaperTag[]
-  category      Category?      @relation(fields: [categoryId], references: [id])
+  category      Category?      @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   categoryId    String?
   saved         SavedPost[]
 
