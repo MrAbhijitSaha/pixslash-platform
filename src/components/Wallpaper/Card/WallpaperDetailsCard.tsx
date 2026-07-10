@@ -168,17 +168,20 @@ const WallpaperDetailsCard = ({
           </div>
         </div>
 
-        {getDetails.wallpaperTags.length !== 0 && <CardTitle>Tags </CardTitle>}
-
-        <div className="space-x-3">
-          {getDetails.wallpaperTags.map((wt) => (
-            <div
-              key={wt.tag.id}
-              className={buttonVariants({ variant: "default" })}>
-              {wt.tag.title}
+        {getDetails.wallpaperTags.length !== 0 && (
+          <>
+            <CardTitle>Tags </CardTitle>
+            <div className="space-x-3">
+              {getDetails.wallpaperTags.map((wt) => (
+                <div
+                  key={wt.tag.id}
+                  className={buttonVariants({ variant: "default" })}>
+                  {wt.tag.title}
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </>
+        )}
       </CardContent>
       <Collapsible>
         {/* Comment section  */}

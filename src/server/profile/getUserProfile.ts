@@ -26,7 +26,7 @@ const getUserProfile = async ({ userId }: GetUserProfileProps) => {
     notFound();
   }
 
-  return prisma.user.findUniqueOrThrow({
+  const user = await prisma.user.findUnique({
     where: {
       id: userId,
     },
@@ -39,6 +39,12 @@ const getUserProfile = async ({ userId }: GetUserProfileProps) => {
       email: true,
     },
   });
+
+  if (!user) {
+    notFound();
+  }
+
+  return user;
 };
 
 export default getUserProfile;

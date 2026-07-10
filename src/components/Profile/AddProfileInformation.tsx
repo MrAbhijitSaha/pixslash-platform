@@ -106,8 +106,9 @@ const AddProfileInformation = ({ info }: AddProfileInformationProps) => {
             <Input
               {...field}
               id={field.name}
+              type="tel"
               aria-invalid={fieldState.invalid}
-              autoComplete="name"
+              autoComplete="tel"
               placeholder="Phone number"
             />
 

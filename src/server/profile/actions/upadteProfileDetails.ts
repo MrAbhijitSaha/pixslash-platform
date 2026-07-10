@@ -55,7 +55,7 @@ const upadteProfileDetails = async (formData: FormData) => {
     console.error(error);
     return {
       isSuccess: false,
-      message: "Something went worng ! Please try again ",
+      message: "Something went wrong ! Please try again ",
     };
   }
 };

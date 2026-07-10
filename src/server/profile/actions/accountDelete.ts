@@ -35,6 +35,12 @@ const accountDelete = async () => {
       };
     }
 
+    await prisma.user.delete({
+      where: {
+        id: session.user.id,
+      },
+    });
+
     // Delete profile picture
     if (user.image) {
       try {
@@ -54,12 +60,6 @@ const accountDelete = async () => {
         }
       }),
     );
-
-    await prisma.user.delete({
-      where: {
-        id: session.user.id,
-      },
-    });
 
     revalidatePath("/", "layout");
 

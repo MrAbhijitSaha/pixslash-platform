@@ -12,76 +12,77 @@ const getDetailsOfWallpaper = async ({ imgId }: getDetailsOfWallpaperProps) => {
     return notFound();
   }
 
-  try {
-    return await prisma.wallpaper.findUniqueOrThrow({
-      where: {
-        slug: imgId,
-        isPublic: true,
-      },
-      omit: {
-        thumbnailUrl: true,
-        updatedAt: true,
-        categoryId: true,
-      },
+  const wallpaper = await prisma.wallpaper.findUnique({
+    where: {
+      slug: imgId,
+      isPublic: true,
+    },
+    omit: {
+      thumbnailUrl: true,
+      updatedAt: true,
+      categoryId: true,
+    },
 
-      include: {
-        category: {
-          select: {
-            categoryName: true,
-          },
+    include: {
+      category: {
+        select: {
+          categoryName: true,
         },
+      },
 
-        wallpaperTags: {
-          select: {
-            tag: {
-              select: {
-                title: true,
-                slug: true,
-                id: true,
-              },
+      wallpaperTags: {
+        select: {
+          tag: {
+            select: {
+              title: true,
+              slug: true,
+              id: true,
             },
           },
         },
+      },
 
-        user: {
-          select: {
-            name: true,
-            image: true,
-          },
+      user: {
+        select: {
+          name: true,
+          image: true,
+        },
+      },
+
+      comments: {
+        orderBy: {
+          createdAt: "desc",
         },
 
-        comments: {
-          orderBy: {
-            createdAt: "desc",
-          },
+        select: {
+          id: true,
+          opinion: true,
+          createdAt: true,
 
-          select: {
-            id: true,
-            opinion: true,
-            createdAt: true,
-
-            user: {
-              select: {
-                id: true,
-                name: true,
-                image: true,
-              },
+          user: {
+            select: {
+              id: true,
+              name: true,
+              image: true,
             },
           },
         },
+      },
 
-        _count: {
-          select: {
-            likes: true,
-            comments: true,
-          },
+      _count: {
+        select: {
+          likes: true,
+          comments: true,
         },
       },
-    });
-  } catch (eror) {
-    console.error(eror);
+    },
+  });
+
+  if (!wallpaper) {
     notFound();
   }
+
+  return wallpaper;
 };
 
 export default getDetailsOfWallpaper;

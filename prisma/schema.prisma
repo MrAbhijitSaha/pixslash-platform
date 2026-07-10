@@ -109,7 +109,7 @@ model Wallpaper {
   likes         Like[]
   comments      Comment[]
   wallpaperTags WallpaperTag[]
-  category      Category?      @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  category      Category?      @relation(fields: [categoryId], references: [id], onDelete: SetNull)
   categoryId    String?
   saved         SavedPost[]
 

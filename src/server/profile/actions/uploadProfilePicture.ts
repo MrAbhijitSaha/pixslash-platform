@@ -67,6 +67,8 @@ const uploadProfilePicture = async (img: File) => {
     const extension = metadata.format === "jpeg" ? "jpg" : metadata.format;
     const imgId = `${randomUUID()}.${extension}`;
 
+    await fs.mkdir("./public/user/profilepicture", { recursive: true });
+
     await sharp(imgBuffer)
       .resize({
         width: 400,

@@ -14,8 +14,8 @@ export const registerSchema = z
 
     password: z
       .string()
-      .min(8, { error: "Passsword must be at least 8 characters long" })
-      .max(128, { error: "Passsword must not exceed 128 characters" }),
+      .min(8, { error: "Password must be at least 8 characters long" })
+      .max(128, { error: "Password must not exceed 128 characters" }),
 
     confirmPassword: z
       .string()
@@ -33,7 +33,7 @@ export const loginSchema = z.object({
     .toLowerCase(),
   password: z
     .string()
-    .min(8, { error: "Passsword must be at least 8 characters long" })
+    .min(8, { error: "Password must be at least 8 characters long" })
     .max(128, { error: "password must not exceed 128 characters" }),
   rememberMe: z.boolean(),
 });
@@ -82,7 +82,7 @@ export const profileInformationSchema = z.object({
 
   mobileNumber: z
     .string()
-    .length(10, { error: "Invaild number" })
+    .length(10, { error: "Invalid number" })
     .optional()
     .or(z.literal("")),
 
@@ -95,16 +95,16 @@ export const profileInformationSchema = z.object({
     .or(z.literal("")),
 });
 
-export const chnagePasswordSchema = z
+export const changePasswordSchema = z
   .object({
     currentPassword: z
       .string()
-      .max(128, { error: "Passsword must not exceed 128 characters" }),
+      .max(128, { error: "Password must not exceed 128 characters" }),
 
     newPassword: z
       .string()
-      .min(8, { error: "Passsword must be at least 8 characters long" })
-      .max(128, { error: "Passsword must not exceed 128 characters" }),
+      .min(8, { error: "Password must be at least 8 characters long" })
+      .max(128, { error: "Password must not exceed 128 characters" }),
 
     confirmPassword: z
       .string()

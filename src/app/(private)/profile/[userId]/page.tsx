@@ -10,7 +10,6 @@ import {
   CardTitle,
 } from "@/components/shadcnui/card";
 import { Separator } from "@/components/shadcnui/separator";
-import prisma from "@/lib/database/dbClient";
 import getUserProfile from "@/server/profile/getUserProfile";
 import { Trash2Icon } from "lucide-react";
 import { Metadata } from "next";
@@ -27,17 +26,11 @@ export const generateMetadata = async ({
 }: PageProps): Promise<Metadata> => {
   const { userId } = await params;
 
-  const user = await prisma.user.findUniqueOrThrow({
-    where: {
-      id: userId,
-    },
-    select: {
-      name: true,
-      bio: true,
-    },
-  });
+  let user;
 
-  if (!user) {
+  try {
+    user = await getUserProfile({ userId });
+  } catch {
     notFound();
   }
 
@@ -96,7 +89,7 @@ const Page = async ({ params }: PageProps) => {
         <Card>
           <CardHeader>
             <CardTitle className="text-2xl font-semibold">
-              Chnage Password
+              Change Password
             </CardTitle>
           </CardHeader>
 

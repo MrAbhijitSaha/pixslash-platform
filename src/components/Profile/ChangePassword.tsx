@@ -1,8 +1,8 @@
 "use client";
 
 import { authClient } from "@/lib/auth-client";
-import { ChnagePasswordSchemaType } from "@/lib/type";
-import { chnagePasswordSchema } from "@/lib/zodSchema";
+import { ChangePasswordSchemaType } from "@/lib/type";
+import { changePasswordSchema } from "@/lib/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -18,7 +18,7 @@ const ChangePassword = () => {
     formState: { isSubmitting, dirtyFields },
     reset,
   } = useForm({
-    resolver: zodResolver(chnagePasswordSchema),
+    resolver: zodResolver(changePasswordSchema),
     defaultValues: {
       currentPassword: "",
       newPassword: "",
@@ -34,7 +34,7 @@ const ChangePassword = () => {
   const submitPassword = async ({
     currentPassword,
     newPassword,
-  }: ChnagePasswordSchemaType) => {
+  }: ChangePasswordSchemaType) => {
     try {
       const { error } = await authClient.changePassword({
         currentPassword: currentPassword,
@@ -128,7 +128,7 @@ const ChangePassword = () => {
         disabled={isSubmitting || !allFieldsDirty}>
         {isSubmitting ?
           <>
-            <Spinner /> Save chnages...
+            <Spinner /> Save changes...
           </>
         : "Save Password"}
       </Button>
