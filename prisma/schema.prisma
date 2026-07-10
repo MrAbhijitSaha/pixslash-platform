@@ -166,7 +166,7 @@ model Like {
 
   // Relations 
   user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  wallpaper Wallpaper @relation(fields: [wallpaperId], references: [id], onDelete: Cascade)
+  wallpaper Wallpaper @relation(fields: [wallpaperId], references: [id])
 
   @@id([userId, wallpaperId])
   @@index([wallpaperId])
