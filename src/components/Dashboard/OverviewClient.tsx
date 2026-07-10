@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "../shadcnui/avatar";
 
 type Activity = {
   id: string;
@@ -44,12 +44,18 @@ export default function OverviewClient({ initial }: { initial: Activity[] }) {
           <div
             key={a.id}
             className="flex items-start gap-3">
-            <Image
-              src={a.user.image || `/wallpapers/posts/default-avatar.png`}
-              alt={a.user.name || "user"}
-              fill={true}
-              className="h-8 w-8 rounded-full object-cover"
-            />
+            {
+              <Avatar size="lg">
+                <AvatarImage
+                  src={a?.user?.image || ""}
+                  alt={a?.user?.name || "User"}
+                />
+                <AvatarFallback>
+                  {a?.user?.name?.charAt(0)?.toUpperCase() || "U"}
+                </AvatarFallback>
+              </Avatar>
+            }
+
             <div>
               <p className="text-sm">
                 <span className="font-medium">{a.user.name || "Someone"}</span>{" "}
