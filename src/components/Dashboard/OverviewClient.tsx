@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 type Activity = {
@@ -43,9 +44,10 @@ export default function OverviewClient({ initial }: { initial: Activity[] }) {
           <div
             key={a.id}
             className="flex items-start gap-3">
-            <img
+            <Image
               src={a.user.image || `/wallpapers/posts/default-avatar.png`}
               alt={a.user.name || "user"}
+              fill={true}
               className="h-8 w-8 rounded-full object-cover"
             />
             <div>
