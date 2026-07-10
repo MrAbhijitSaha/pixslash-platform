@@ -37,7 +37,7 @@ const getOverview = async () => {
       wallpaper: { select: { id: true, title: true } },
     },
     orderBy: { createdAt: "desc" },
-    take: 8,
+    take: 10,
   });
 
   const recentComments = await prisma.comment.findMany({
@@ -47,7 +47,7 @@ const getOverview = async () => {
       wallpaper: { select: { id: true, title: true } },
     },
     orderBy: { createdAt: "desc" },
-    take: 8,
+    take: 10,
   });
 
   // merge activities

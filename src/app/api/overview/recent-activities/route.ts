@@ -19,7 +19,7 @@ export async function GET() {
         wallpaper: { select: { id: true, title: true } },
       },
       orderBy: { createdAt: "desc" },
-      take: 8,
+      take: 10,
     });
 
     const recentComments = await prisma.comment.findMany({
@@ -29,7 +29,7 @@ export async function GET() {
         wallpaper: { select: { id: true, title: true } },
       },
       orderBy: { createdAt: "desc" },
-      take: 8,
+      take: 10,
     });
 
     const recentActivities = [
