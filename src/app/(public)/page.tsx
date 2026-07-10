@@ -1,11 +1,6 @@
-import { Separator } from "@/components/shadcnui/separator";
-import CategorySlider from "@/components/Wallpaper/Category/CategorySlider";
 import MasonryWallpaperGrid from "@/components/Wallpaper/Grid/MaonaryWallpaperGrid";
-import { auth } from "@/lib/auth";
-import prisma from "@/lib/database/dbClient";
 import getAllWallpaper from "@/server/wallpaper/getAllWallpaper";
 import { Metadata } from "next";
-import { headers } from "next/headers";
 
 export const metadata: Metadata = {
   title: "Stunning Free Wallpapers & Images | Pixslash",
@@ -14,20 +9,7 @@ export const metadata: Metadata = {
 };
 
 const page = async () => {
-  const [getAllWallpapers, getCategory] = await Promise.all([
-    getAllWallpaper(),
-    prisma.category.findMany(),
-  ]);
-
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
-  let isLogin = false;
-
-  if (session) {
-    isLogin = true;
-  }
+  const getAllWallpapers = await getAllWallpaper();
 
   if (getAllWallpapers.length === 0) {
     return (
@@ -35,28 +17,7 @@ const page = async () => {
     );
   }
 
-  return (
-    <>
-      <h1 className="text-4xl font-bold">Wallpapers</h1>
-      <p className="pt-1 pb-4 text-[16px] tracking-wider text-black/70 dark:text-white/70">
-        The best free stock photos, royalty free images shared by creators.
-      </p>
-
-      <Separator />
-
-      {getCategory.length > 0 && (
-        <section className={isLogin ? "md:max-w-lg lg:max-w-4xl" : ""}>
-          <h2 className="pt-4 text-2xl">Popular Wallpaper Categories</h2>
-          <CategorySlider
-            categoryInfo={getCategory}
-            chechklogin={isLogin}
-          />
-        </section>
-      )}
-
-      <MasonryWallpaperGrid wallpapers={getAllWallpapers} />
-    </>
-  );
+  return <MasonryWallpaperGrid wallpapers={getAllWallpapers} />;
 };
 
 export default page;

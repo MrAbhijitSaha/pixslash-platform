@@ -2,7 +2,7 @@ import OverviewChart from "@/components/Dashboard/OverviewChart";
 import OverviewClient from "@/components/Dashboard/OverviewClient";
 import getOverview from "@/server/overview/getOverview";
 
-const Page = async () => {
+const page = async () => {
   const overview = await getOverview();
 
   const chartData = (overview.likesByDay ?? []).map(
@@ -81,4 +81,4 @@ const Page = async () => {
   );
 };
 
-export default Page;
+export default page;
